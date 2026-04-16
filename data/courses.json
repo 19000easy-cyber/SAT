@@ -1,0 +1,191 @@
+{
+  "courses": [
+    {
+      "id": "sat-1",
+      "title": "SAT Prep: Math & Reading",
+      "description": "기본 문제 풀이와 해설로 구성된 SAT 준비 코스",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "Reading: Passage 1 (Practice)",
+          "videoId": "u9Dg-g7t2l4",
+          "quizzes": {
+            "easy": [
+              {
+                "id": "l1-e1",
+                "type": "single",
+                "question": "이 글의 주제는 무엇인가?",
+                "options": { "a": "선택지 A", "b": "선택지 B", "c": "선택지 C" },
+                "answer": "b"
+              },
+              {
+                "id": "l1-e2",
+                "type": "single",
+                "question": "다음 단어의 의미는 무엇인가? 'Benevolent'",
+                "options": { "a": "악의 있는", "b": "친절한", "c": "무관심한" },
+                "answer": "b"
+              },
+              {
+                "id": "l1-e3",
+                "type": "single",
+                "question": "이 문장에서 'however'는 어떤 역할을 하는가?",
+                "options": { "a": "강조", "b": "대조", "c": "원인" },
+                "answer": "b"
+              },
+              {
+                "id": "l1-e4",
+                "type": "single",
+                "question": "다음 문장의 주어는 무엇인가?",
+                "options": { "a": "명사", "b": "동사", "c": "형용사" },
+                "answer": "a"
+              },
+              {
+                "id": "l1-e5",
+                "type": "single",
+                "question": "'The cat sat on the mat.' 이 문장은 어떤 시제인가?",
+                "options": { "a": "과거", "b": "현재", "c": "미래" },
+                "answer": "b"
+              }
+            ],
+            "medium": [
+              {
+                "id": "l1-m1",
+                "type": "single",
+                "question": "이 글에서 저자가 주장하는 핵심 요지는 무엇인가?",
+                "options": { "a": "옵션 A", "b": "옵션 B", "c": "옵션 C" },
+                "answer": "a"
+              },
+              {
+                "id": "l1-m2",
+                "type": "single",
+                "question": "다음 문단의 주장을 뒷받침하는 증거는 무엇인가?",
+                "options": { "a": "예시 1", "b": "예시 2", "c": "예시 3" },
+                "answer": "a"
+              },
+              {
+                "id": "l1-m3",
+                "type": "single",
+                "question": "저자의 어조는 어떠한가?",
+                "options": { "a": "비판적", "b": "중립적", "c": "지지적" },
+                "answer": "b"
+              },
+              {
+                "id": "l1-m4",
+                "type": "single",
+                "question": "이 글의 구조는 어떻게 되어 있는가?",
+                "options": { "a": "서론-본론-결론", "b": "비교", "c": "기술" },
+                "answer": "a"
+              },
+              {
+                "id": "l1-m5",
+                "type": "single",
+                "question": "다음 단어의 유의어는 무엇인가? 'Eloquent'",
+                "options": { "a": "말 없는", "b": "유창한", "c": "조용한" },
+                "answer": "b"
+              }
+            ],
+            "hard": [
+              {
+                "id": "l1-h1",
+                "type": "single",
+                "question": "다음 문단의 암시적 의미를 분석한 것으로 옳은 것은?",
+                "options": { "a": "보기 1", "b": "보기 2", "c": "보기 3" },
+                "answer": "c"
+              },
+              {
+                "id": "l1-h2",
+                "type": "single",
+                "question": "이 글의 구조를 가장 잘 설명하는 것은?",
+                "options": { "a": "문제-해결", "b": "원인-결과", "c": "비교-대조" },
+                "answer": "a"
+              },
+              {
+                "id": "l1-h3",
+                "type": "single",
+                "question": "저자의 의도는 무엇인가?",
+                "options": { "a": "설득", "b": "정보 제공", "c": "오락" },
+                "answer": "a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "l2",
+          "title": "Math: Heart of Algebra",
+          "videoId": "dQw4w9WgXcQ",
+          "quizzes": {
+            "easy": [
+              {
+                "id": "l2-e1",
+                "type": "single",
+                "question": "If 2x + 3 = 7, what is x?",
+                "options": { "a": "1", "b": "2", "c": "3" },
+                "answer": "b"
+              },
+              {
+                "id": "l2-e2",
+                "type": "single",
+                "question": "Solve: 5y = 20. y = ?",
+                "options": { "a": "4", "b": "5", "c": "15" },
+                "answer": "a"
+              },
+              {
+                "id": "l2-e3",
+                "type": "single",
+                "question": "What is 3 + 4?",
+                "options": { "a": "5", "b": "7", "c": "8" },
+                "answer": "b"
+              }
+            ],
+            "medium": [
+              {
+                "id": "l2-m1",
+                "type": "single",
+                "question": "Solve for x: 3x - 5 = 16.",
+                "options": { "a": "7", "b": "21", "c": "-7" },
+                "answer": "a"
+              },
+              {
+                "id": "l2-m2",
+                "type": "single",
+                "question": "If 4z + 2 = 18, z = ?",
+                "options": { "a": "3", "b": "4", "c": "5" },
+                "answer": "b"
+              },
+              {
+                "id": "l2-m3",
+                "type": "single",
+                "question": "Solve: 2(x + 1) = 10. x = ?",
+                "options": { "a": "3", "b": "4", "c": "5" },
+                "answer": "b"
+              }
+            ],
+            "hard": [
+              {
+                "id": "l2-h1",
+                "type": "single",
+                "question": "If 2(x+3) = 3(x-1), what is x?",
+                "options": { "a": "-9", "b": "-1", "c": "3" },
+                "answer": "b"
+              },
+              {
+                "id": "l2-h2",
+                "type": "single",
+                "question": "Solve: 5(x - 2) = 3(x + 4). x = ?",
+                "options": { "a": "13", "b": "7", "c": "-7" },
+                "answer": "a"
+              },
+              {
+                "id": "l2-h3",
+                "type": "single",
+                "question": "If ax + b = c, and a=2, b=3, c=7, x = ?",
+                "options": { "a": "1", "b": "2", "c": "3" },
+                "answer": "b"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
