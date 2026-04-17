@@ -10,8 +10,8 @@
           "title": "Reading: Passage 1 (Practice)",
           "videoId": "u9Dg-g7t2l4",
           "passages": {
-            "en": "The history of the United States is marked by periods of rapid change and innovation. From the Industrial Revolution to the Digital Age, Americans have consistently pushed the boundaries of what is possible. This drive for progress has not only shaped the nation's economy but also influenced global trends in technology and culture.",
-            "ko": "미국의 역사는 급속한 변화와 혁신의 시기로 특징지어진다. 산업혁명부터 디지털 시대까지, 미국인들은 가능한 것의 한계를 지속적으로 밀어붙였다. 이 진보에 대한 추진력은 국가의 경제를 형성할 뿐만 아니라 기술과 문화의 글로벌 트렌드에도 영향을 미쳤다."
+            "en": "Climate change represents one of the most pressing challenges facing humanity today. Scientists around the world have documented rising temperatures, melting ice caps, and increasingly severe weather patterns. The burning of fossil fuels releases greenhouse gases into the atmosphere, trapping heat and altering Earth's climate system. To address this crisis, nations must transition to renewable energy sources and implement sustainable practices. The time for action is now, as delay will only intensify future consequences.",
+            "ko": "기후 변화는 현재 인류가 직면한 가장 시급한 문제 중 하나를 나타낸다. 전 세계의 과학자들은 기온 상승, 빙상 용해, 점점 심해지는 기후 패턴을 기록했다. 화석 연료의 연소는 온실가스를 대기에 방출하여 열을 가두고 지구의 기후 시스템을 변화시킨다. 이 위기에 대처하기 위해 국가들은 재생 에너지로 전환하고 지속 가능한 관행을 시행해야 한다. 행동할 시간은 지금이며, 지연은 미래의 결과를 악화시킬 뿐이다."
           },
           "quizzes": {
             "easy": [
@@ -153,8 +153,8 @@
           "title": "Math: Heart of Algebra",
           "videoId": "dQw4w9WgXcQ",
           "passages": {
-            "en": "Algebra is the foundation of advanced mathematics. It involves using variables and mathematical operations to solve equations and understand relationships between quantities. One of the most common tasks in algebra is solving linear equations, which can be written in the form ax + b = c. To solve such equations, we use the properties of equality: what we do to one side of the equation, we must do to the other side to keep it balanced. Common steps include adding or subtracting terms to isolate the variable, and then dividing or multiplying to find the final solution.",
-            "ko": "대수학은 고등 수학의 기초입니다. 변수와 수학 연산을 사용하여 방정식을 풀고 수량 간의 관계를 이해합니다. 대수학에서 가장 일반적인 작업 중 하나는 선형 방정식을 푸는 것이며, 이는 ax + b = c 형태로 쓸 수 있습니다. 이러한 방정식을 풀기 위해 등식의 성질을 사용합니다: 한쪽에 하는 것을 다른 쪽에도 해서 균형을 유지합니다. 일반적인 단계는 변수를 분리하기 위해 항을 더하거나 빼는 것이고, 최종 해를 구하기 위해 나누거나 곱합니다."
+            "en": "Systems of linear equations appear frequently in real-world applications, from engineering to economics. When solving these systems, we look for values of variables that satisfy all equations simultaneously. Graphically, the solution represents the point where two or more lines intersect. Algebraically, we use methods such as substitution or elimination to find these intersection points. Understanding how to solve systems is essential for higher mathematics and practical problem-solving.",
+            "ko": "선형 방정식 체계는 공학부터 경제학까지 실제 응용에서 자주 나타난다. 이 시스템을 풀 때, 우리는 모든 방정식을 동시에 만족하는 변수 값을 찾는다. 그래픽으로, 해는 두 개 이상의 직선이 교차하는 점을 나타낸다. 대수적으로, 우리는 대입법이나 소거법과 같은 방법을 사용하여 이 교차점을 찾는다. 시스템을 풀 수 있는 방법을 이해하는 것은 고등 수학과 실제 문제 해결에 필수적이다."
           },
           "quizzes": {
             "easy": [
