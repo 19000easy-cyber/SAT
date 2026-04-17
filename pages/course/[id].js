@@ -66,9 +66,9 @@ export default function CoursePage() {
     })
   }
 
- const { t } = useI18n();
+  const { t, lang } = useI18n();
 
- // 1. 데이터 정의 (딱 한 번만 선언!)
+  // 1. 데이터 정의 (딱 한 번만 선언!)
   const lesson = course?.lessons?.[lessonIdx];
   const curDiff = difficulties?.[lesson?.id] || 'medium';
   const questions = lesson?.quizzes?.[curDiff] || lesson?.quizzes || [];
@@ -82,17 +82,19 @@ export default function CoursePage() {
       setFeedback(null);
       return;
     }
-    setQuestionOrder(shuffleArray(questions));
+    // 인덱스 배열 생성 후 섞기
+    const indices = Array.from({ length: questions.length }, (_, i) => i);
+    setQuestionOrder(shuffleArray(indices));
     setCurrentQuestionIdx(0);
     setSelected(null);
     setFeedback(null);
-  }, [lessonIdx, curDiff, course?.id]);
+  }, [questions, lessonIdx, curDiff, course?.id]);
 
   // 3. 현재 문제 정보 정의
-  const currentQuestionIdxInOrder = questionOrder[currentQuestionIdx];
-  const currentQuestion = questions[currentQuestionIdxInOrder];
+  const currentQuestionIdx_Shuffled = questionOrder[currentQuestionIdx];
+  const currentQuestion = currentQuestionIdx_Shuffled !== undefined ? questions[currentQuestionIdx_Shuffled] : null;
 
- // 4. 보기 셔플 및 옵션 정의 (중복 없이 한 번만!)
+  // 4. 보기 셔플 및 옵션 정의 (중복 없이 한 번만!)
   const currentOptions = useMemo(() => {
     if (!currentQuestion) return [];
     
@@ -106,63 +108,61 @@ export default function CoursePage() {
     })));
   }, [currentQuestion?.id]);
 
-  // 5. 데이터가 없을 때의 처리는 Hook들 '아래'에서 합니다. (중복 제거)
-  if (!course) return <div>{t('loading')}</div>;
-
-  const submitQuiz = async (q) => {
-    if (!course) return;
-    if (!selected) {
-      alert(t('select_answer'));
+  // 5. submitQuiz 함수 정의
+  const submitQuiz = async (question) => {
+    if (!course || !selected) {
+      if (!selected) alert(t ? t('select_answer') : 'Please select an answer');
       return;
     }
-    // ... 기존의 나머지 제출 로직이 이어집니다.
-    }
 
-    const lessonId = lesson.id
-    const curDiff = difficulties[lessonId] || 'medium'
-    const question = q
-    const correct = question.answer
-    const correctAnswer = selected === correct
-    const points = question.points || 10
+    const correct = question.answer;
+    const isCorrect = selected === correct;
+    const lessonId = lesson.id;
+    
+    const curDiff = difficulties?.[lessonId] || 'medium';
+    const order = ['easy', 'medium', 'hard'];
+    let idx = order.indexOf(curDiff);
+    if (isCorrect && idx < order.length - 1) idx += 1;
+    if (!isCorrect && idx > 0) idx -= 1;
+    const newDiff = order[idx];
 
-    const order = ['easy', 'medium', 'hard']
-    let idx = order.indexOf(curDiff)
-    if (correctAnswer && idx < order.length - 1) idx += 1
-    if (!correctAnswer && idx > 0) idx -= 1
-    const newDiff = order[idx]
-    const newDifficulties = { ...difficulties, [lessonId]: newDiff }
-    setDifficulties(newDifficulties)
+    const newDifficulties = { ...difficulties, [lessonId]: newDiff };
+    const scoreChange = isCorrect ? 10 : -5;
+    const newSatScore = Math.max(200, Math.min(800, (satScore || 0) + scoreChange));
+    const gotProgress = isCorrect ? 100 : 50;
 
-    const scoreChange = correctAnswer ? points : -Math.floor(points / 2)
-    const newSatScore = Math.max(200, Math.min(800, satScore + scoreChange))
-    setSatScore(newSatScore)
+    if (setDifficulties) setDifficulties(newDifficulties);
+    if (setSatScore) setSatScore(newSatScore);
+    if (setProgress) setProgress(gotProgress);
 
-    const got = correctAnswer ? 100 : 50
-    setProgress(got)
-
-    const correctOption = currentOptions.find(option => option.key === correct) || { en: correct, ko: correct }
+    const correctOption = currentOptions.find(o => o.key === correct) || { en: '', ko: '' };
     setFeedback({
-      correct: correctAnswer,
+      correct: isCorrect,
       correctKey: correct,
       correctTextEn: correctOption.en,
       correctTextKo: correctOption.ko,
-      explanationEn: question.explanation?.en || `The correct answer is ${correctOption.en}.`,
+      explanationEn: question.explanation?.en || '',
       explanationKo: question.explanation?.ko || `정답은 ${correctOption.ko}입니다.`,
-    })
+    });
 
-    await saveProgress(got, newSatScore, newDifficulties)
+    if (typeof saveProgress === 'function') {
+      await saveProgress(gotProgress, newSatScore, newDifficulties);
+    }
 
-    setSelected(null)
-    if (questionOrder.length > 1) {
-      const nextIndex = currentQuestionIdx + 1
+    setSelected(null);
+
+    if (questionOrder && questionOrder.length > 0) {
+      const nextIndex = currentQuestionIdx + 1;
       if (nextIndex < questionOrder.length) {
-        setCurrentQuestionIdx(nextIndex)
+        setCurrentQuestionIdx(nextIndex);
       } else {
-        setQuestionOrder(shuffleArray(questionOrder))
-        setCurrentQuestionIdx(0)
+        setCurrentQuestionIdx(0);
       }
     }
-  }
+  };
+
+  // 6. 데이터가 없을 때의 처리
+  if (!course) return <div>{t('loading')}</div>;
 
   return (
     <div style={{ maxWidth: 900, margin: '40px auto', fontFamily: 'Arial, sans-serif' }}>
@@ -174,7 +174,9 @@ export default function CoursePage() {
         <ul>
           {course.lessons.map((l, i) => (
             <li key={l.id} style={{ margin: '6px 0' }}>
-              <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null) }}>{i + 1}. {l.title}</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null); }}>
+                {i + 1}. {l.title}
+              </a>
             </li>
           ))}
         </ul>
@@ -188,20 +190,20 @@ export default function CoursePage() {
 
       {lesson.passages && (
         <div style={{ marginBottom: 20 }}>
-          <h3>{t ? t('reading_passage') : 'Passage'}</h3>
-          <div style={{ background: '#fafafa', padding: 16, border: '1px solid #ddd', borderRadius: 6, lineHeight: '1.6' }}>
-            {lesson.passages['en']}
+          <h3 style={{ marginBottom: 15 }}>{t ? t('reading_passage') : 'Passage'}</h3>
+          <div style={{ background: '#fafafa', padding: 16, border: '1px solid #ddd', borderRadius: 6, fontSize: 16, lineHeight: 1.6 }}>
+            {lesson.passages[lang]}
           </div>
         </div>
       )}
 
-      <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${curDiff}`)})</h2>
+      <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${difficulties?.[lesson.id] || 'medium'}`)})</h2>
 
       {currentQuestion ? (
         <div style={{ marginBottom: 20, padding: 16, border: '1px solid #ddd', borderRadius: 6 }}>
           <p style={{ marginBottom: 8 }}><strong>EN:</strong> {currentQuestion.question?.en || currentQuestion.question}</p>
           <p style={{ marginTop: 0, marginBottom: 16 }}><strong>KO:</strong> {currentQuestion.question?.ko || currentQuestion.question}</p>
-
+          
           {currentOptions.map(option => (
             <label key={option.key} style={{ display: 'block', marginBottom: 8 }}>
               <input
@@ -235,5 +237,5 @@ export default function CoursePage() {
       <h3 style={{ marginTop: 24 }}>{t('progress')}: {progress}%</h3>
       <h3 style={{ marginTop: 12 }}>{t('sat_score')}: {satScore}</h3>
     </div>
-  )
+  );
 }

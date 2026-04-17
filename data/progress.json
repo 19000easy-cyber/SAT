@@ -4,10 +4,11 @@
   },
   "u_cc2vmyj": {
     "sat-1": {
-      "progress": 0,
+      "progress": 100,
       "difficulties": {
-        "l1": "easy"
-      }
+        "l1": "medium"
+      },
+      "satScore": 210
     }
   },
   "u_vlsboyt": {

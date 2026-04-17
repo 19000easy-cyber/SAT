@@ -152,6 +152,10 @@
           "id": "l2",
           "title": "Math: Heart of Algebra",
           "videoId": "dQw4w9WgXcQ",
+          "passages": {
+            "en": "Algebra is the foundation of advanced mathematics. It involves using variables and mathematical operations to solve equations and understand relationships between quantities. One of the most common tasks in algebra is solving linear equations, which can be written in the form ax + b = c. To solve such equations, we use the properties of equality: what we do to one side of the equation, we must do to the other side to keep it balanced. Common steps include adding or subtracting terms to isolate the variable, and then dividing or multiplying to find the final solution.",
+            "ko": "대수학은 고등 수학의 기초입니다. 변수와 수학 연산을 사용하여 방정식을 풀고 수량 간의 관계를 이해합니다. 대수학에서 가장 일반적인 작업 중 하나는 선형 방정식을 푸는 것이며, 이는 ax + b = c 형태로 쓸 수 있습니다. 이러한 방정식을 풀기 위해 등식의 성질을 사용합니다: 한쪽에 하는 것을 다른 쪽에도 해서 균형을 유지합니다. 일반적인 단계는 변수를 분리하기 위해 항을 더하거나 빼는 것이고, 최종 해를 구하기 위해 나누거나 곱합니다."
+          },
           "quizzes": {
             "easy": [
               {
