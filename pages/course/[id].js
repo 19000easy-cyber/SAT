@@ -142,6 +142,9 @@ export default function CoursePage() {
       correctTextKo: correctOption.ko,
       explanationEn: question.explanation?.en || '',
       explanationKo: question.explanation?.ko || `정답은 ${correctOption.ko}입니다.`,
+      detailedExplanation: question.detailedExplanation || null,
+      videoUrl: lesson.videoUrl || null,
+      videoTitle: lesson.videoTitle || null,
     });
 
     if (typeof saveProgress === 'function') {
@@ -164,20 +167,41 @@ export default function CoursePage() {
   if (!course) return <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>{t('loading')}</div>;
 
   return (
-    <div style={{ padding: '40px 20px' }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '30px', borderRadius: '8px', marginBottom: '30px' }}>
+    <div style={{ minHeight: '100vh', background: '#f8f9fa' }}>
+      {/* 헤더 */}
+      <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '30px 20px', boxShadow: '0 4px 12px rgba(102, 126, 234, 0.2)' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <h1 style={{ fontSize: '32px', marginBottom: '8px', margin: 0 }}>{course.title}</h1>
           <p style={{ opacity: 0.95, margin: 0 }}>{course.description}</p>
         </div>
+      </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '250px 1fr', gap: '20px', marginBottom: '20px' }}>
-          <div style={{ background: '#f9f9f9', padding: '16px', borderRadius: '8px', border: '1px solid #e0e0e0' }}>
-            <strong style={{ display: 'block', marginBottom: '12px' }}>{t('toc')}</strong>
+      {/* 메인 콘텐츠 (좌우 2분할) */}
+      <div style={{ display: 'flex', maxWidth: '1400px', margin: '0 auto', gap: '20px', padding: '20px', minHeight: 'calc(100vh - 140px)' }}>
+        
+        {/* ===== 왼쪽 패널: 목차 + 지문 (고정/스크롤) ===== */}
+        <div style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          
+          {/* 목차 (고정) */}
+          <div style={{ background: 'white', padding: '16px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)', border: '1px solid #e0e0e0', position: 'sticky', top: '20px' }}>
+            <strong style={{ display: 'block', marginBottom: '12px', fontSize: '14px', color: '#667eea', textTransform: 'uppercase', letterSpacing: '0.5px' }}>📚 {t('toc')}</strong>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {course.lessons.map((l, i) => (
-                <li key={l.id} style={{ marginBottom: '8px' }}>
-                  <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null); }} style={{ display: 'block', padding: '8px 12px', background: lessonIdx === i ? '#4a90e2' : 'transparent', color: lessonIdx === i ? 'white' : '#4a90e2', borderRadius: '4px', textDecoration: 'none' }}>
+                <li key={l.id} style={{ marginBottom: '6px' }}>
+                  <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null); }} 
+                    style={{ 
+                      display: 'block', 
+                      padding: '10px 12px', 
+                      background: lessonIdx === i ? '#667eea' : 'transparent', 
+                      color: lessonIdx === i ? 'white' : '#333', 
+                      borderRadius: '6px', 
+                      textDecoration: 'none',
+                      fontWeight: lessonIdx === i ? '600' : '500',
+                      fontSize: '13px',
+                      transition: 'all 0.2s',
+                      border: lessonIdx === i ? '2px solid #667eea' : '1px solid transparent'
+                    }}
+                  >
                     {i + 1}. {l.title}
                   </a>
                 </li>
@@ -185,67 +209,236 @@ export default function CoursePage() {
             </ul>
           </div>
 
-          <div>
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ background: '#f3f3f3', padding: 24, textAlign: 'center', color: '#666', borderRadius: '8px' }}>
-                {t('noVideo')}
+          {/* 지문 (스크롤 가능) */}
+          {lesson.passages && (
+            <div style={{ 
+              background: 'white', 
+              padding: '16px', 
+              borderRadius: '12px', 
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
+              border: '2px solid #ffd700',
+              overflow: 'auto',
+              maxHeight: '400px'
+            }}>
+              <h4 style={{ marginBottom: 12, marginTop: 0, color: '#ffa500', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>📖 {t ? t('reading_passage') : 'Passage'}</h4>
+              <div style={{ fontSize: '14px', lineHeight: 1.8, color: '#333' }}>
+                {lesson.passages[lang]}
               </div>
-            </div>
-
-            {lesson.passages && (
-              <div style={{ marginBottom: 20, background: '#fffacd', padding: '16px', borderRadius: '8px', border: '2px solid #ffd700' }}>
-                <h3 style={{ marginBottom: 15, marginTop: 0 }}>📖 {t ? t('reading_passage') : 'Passage'}</h3>
-                <div style={{ background: 'white', padding: 16, border: '1px solid #ffd700', borderRadius: 6, fontSize: 16, lineHeight: 1.8 }}>
-                  {lesson.passages[lang]}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${difficulties?.[lesson.id] || 'medium'}`)})</h2>
-
-      {currentQuestion ? (
-        <div style={{ marginBottom: 20, padding: 20, border: '2px solid #4a90e2', borderRadius: 8, background: '#f9fbff' }}>
-          <div style={{ marginBottom: 16 }}>
-            <p style={{ marginBottom: 8, fontSize: '16px', lineHeight: '1.6' }}><strong>Q:</strong> {currentQuestion.question?.[lang] || currentQuestion.question?.en || currentQuestion.question}</p>
-          </div>
-          
-          <div style={{ marginBottom: 16 }}>
-            {currentOptions.map(option => (
-              <label key={option.key} style={{ display: 'block', marginBottom: 10, padding: '10px', borderRadius: '6px', background: selected === option.key ? '#e3f2fd' : '#fff', border: selected === option.key ? '2px solid #4a90e2' : '1px solid #ddd', cursor: 'pointer', transition: 'all 0.2s' }}>
-                <input
-                  type="radio"
-                  name={currentQuestion.id}
-                  value={option.key}
-                  checked={selected === option.key}
-                  onChange={e => setSelected(e.target.value)}
-                  style={{ marginRight: 8 }}
-                />
-                <strong>{option.key})</strong> {option[lang] || option.en}
-              </label>
-            ))}
-          </div>
-
-          <button onClick={() => submitQuiz(currentQuestion)} style={{ marginTop: 16, padding: '10px 20px', background: '#4a90e2', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>{t('submit')}</button>
-
-          {feedback && (
-            <div style={{ marginTop: 18, padding: 16, borderRadius: 6, background: feedback.correct ? '#e8f5e9' : '#ffebee', border: `2px solid ${feedback.correct ? '#4caf50' : '#f44336'}` }}>
-              <strong style={{ fontSize: '18px', color: feedback.correct ? '#4caf50' : '#f44336' }}>{feedback.correct ? '✓ ' + t('correct_msg') : '✗ ' + t('incorrect_msg')}</strong>
-              <div style={{ marginTop: 12 }}><strong>{t('correct_answer')}:</strong> {feedback.correctKey}) {feedback[`correctText${lang === 'ko' ? 'Ko' : 'En'}`]}</div>
-              <div style={{ marginTop: 12 }}><strong>{t('answer_explanation')}:</strong></div>
-              <div style={{ marginTop: 8 }}>{feedback[`explanation${lang === 'ko' ? 'Ko' : 'En'}`]}</div>
             </div>
           )}
         </div>
-      ) : (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>{t('loading')}</div>
-      )}
 
-      <div style={{ marginTop: 32, padding: '16px', background: '#f0f0f0', borderRadius: '8px' }}>
-        <h3 style={{ marginBottom: 8 }}>{t('progress')}: <span style={{ color: '#4a90e2', fontSize: '24px' }}>{progress}%</span></h3>
-        <h3 style={{ marginTop: 0 }}>{t('sat_score')}: <span style={{ color: '#e74c3c', fontSize: '24px' }}>{satScore}</span></h3>
+        {/* ===== 오른쪽 패널: 문제 + 피드백 (스크롤 가능) ===== */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto', paddingRight: '8px' }}>
+          
+          {/* 문제 제목 + 난이도 선택 */}
+          <div style={{ background: 'white', padding: '16px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)', border: '1px solid #e0e0e0' }}>
+            <h3 style={{ margin: 0, color: '#333', fontSize: '16px' }}>
+              {t('quizPrefix')} <span style={{ color: '#4a90e2' }}>{lesson.title}</span>
+            </h3>
+            
+            {/* 난이도 선택 버튼 */}
+            <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+              {['easy', 'medium', 'hard'].map(diff => (
+                <button
+                  key={diff}
+                  onClick={() => {
+                    const newDiff = { ...difficulties, [lessonId]: diff };
+                    setDifficulties(newDiff);
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '8px 12px',
+                    background: curDiff === diff ? (diff === 'easy' ? '#66bb6a' : diff === 'medium' ? '#ffa726' : '#ef5350') : '#e0e0e0',
+                    color: curDiff === diff ? 'white' : '#666',
+                    border: 'none',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontSize: '12px',
+                    fontWeight: curDiff === diff ? 'bold' : '500',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (curDiff !== diff) e.target.style.background = '#ccc';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (curDiff !== diff) e.target.style.background = '#e0e0e0';
+                  }}
+                >
+                  {diff === 'easy' ? '⭐' : diff === 'medium' ? '⭐⭐' : '⭐⭐⭐'} {t(`difficulty_${diff}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 문제 */}
+          {currentQuestion ? (
+            <div style={{ background: 'white', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)', border: '2px solid #4a90e2' }}>
+              
+              {/* 질문 */}
+              <div style={{ marginBottom: '16px' }}>
+                <p style={{ marginBottom: 0, fontSize: '15px', lineHeight: '1.6', color: '#333', fontWeight: '500' }}>
+                  <strong style={{ color: '#4a90e2', marginRight: '8px' }}>Q:</strong> 
+                  {currentQuestion.question?.[lang] || currentQuestion.question?.en || currentQuestion.question}
+                </p>
+              </div>
+
+              {/* 선택지 */}
+              <div style={{ marginBottom: '16px' }}>
+                {currentOptions.map(option => (
+                  <label key={option.key} 
+                    style={{ 
+                      display: 'block', 
+                      marginBottom: 10, 
+                      padding: '12px', 
+                      borderRadius: '8px', 
+                      background: selected === option.key ? '#e3f2fd' : '#f9f9f9', 
+                      border: selected === option.key ? '2px solid #4a90e2' : '1px solid #e0e0e0', 
+                      cursor: 'pointer', 
+                      transition: 'all 0.3s',
+                      boxShadow: selected === option.key ? '0 2px 8px rgba(74, 144, 226, 0.1)' : 'none'
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name={currentQuestion.id}
+                      value={option.key}
+                      checked={selected === option.key}
+                      onChange={e => setSelected(e.target.value)}
+                      style={{ marginRight: 10, cursor: 'pointer' }}
+                    />
+                    <strong style={{ color: selected === option.key ? '#4a90e2' : '#333', fontSize: '14px' }}>{option.key})</strong>
+                    <span style={{ marginLeft: '4px', color: selected === option.key ? '#4a90e2' : '#666', fontSize: '14px' }}>
+                      {option[lang] || option.en}
+                    </span>
+                  </label>
+                ))}
+              </div>
+
+              {/* 제출 버튼 */}
+              <button 
+                onClick={() => submitQuiz(currentQuestion)} 
+                style={{ 
+                  width: '100%',
+                  padding: '12px 20px', 
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white', 
+                  border: 'none', 
+                  borderRadius: '8px', 
+                  cursor: 'pointer', 
+                  fontSize: '15px', 
+                  fontWeight: 'bold',
+                  boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+                  transition: 'all 0.3s',
+                  marginBottom: '12px'
+                }}
+                onMouseEnter={(e) => e.target.style.boxShadow = '0 6px 16px rgba(102, 126, 234, 0.4)'}
+                onMouseLeave={(e) => e.target.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.3)'}
+              >
+                ✓ {t('submit')}
+              </button>
+
+              {/* 피드백 */}
+              {feedback && (
+                <div style={{ 
+                  padding: '16px', 
+                  borderRadius: '8px', 
+                  background: feedback.correct ? '#e8f5e9' : '#ffebee', 
+                  border: `2px solid ${feedback.correct ? '#4caf50' : '#f44336'}`,
+                  boxShadow: feedback.correct ? '0 2px 8px rgba(76, 175, 80, 0.1)' : '0 2px 8px rgba(244, 67, 54, 0.1)'
+                }}>
+                  <strong style={{ fontSize: '16px', color: feedback.correct ? '#4caf50' : '#f44336', display: 'flex', alignItems: 'center' }}>
+                    {feedback.correct ? '✓ ' : '✗ '} {feedback.correct ? t('correct_msg') : t('incorrect_msg')}
+                  </strong>
+                  
+                  {/* 정답 */}
+                  <div style={{ marginTop: 12, padding: '12px', background: 'white', borderRadius: '6px', borderLeft: `4px solid ${feedback.correct ? '#4caf50' : '#f44336'}` }}>
+                    <strong style={{ fontSize: '13px', color: '#666' }}>{t('correct_answer')}:</strong>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: '#333' }}>
+                      <strong>{feedback.correctKey})</strong> {feedback[`correctText${lang === 'ko' ? 'Ko' : 'En'}`]}
+                    </p>
+                  </div>
+                  
+                  {/* 기본 풀이 */}
+                  <div style={{ marginTop: 12, padding: '12px', background: 'white', borderRadius: '6px' }}>
+                    <strong style={{ fontSize: '13px', color: '#666' }}>{t('answer_explanation')}:</strong>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: '#555', lineHeight: '1.6' }}>
+                      {feedback[`explanation${lang === 'ko' ? 'Ko' : 'En'}`]}
+                    </p>
+                  </div>
+
+                  {/* 상세한 풀이 */}
+                  {feedback.detailedExplanation && (
+                    <div style={{ marginTop: 12, padding: '12px', background: '#f0f8ff', borderRadius: '6px', border: '1px solid #b3d9ff' }}>
+                      <strong style={{ fontSize: '13px', color: '#0066cc', display: 'flex', alignItems: 'center' }}>
+                        💡 {lang === 'ko' ? '자세한 풀이' : 'Detailed Solution'}
+                      </strong>
+                      <p style={{ margin: '6px 0 0 0', fontSize: '13px', color: '#333', lineHeight: '1.7', whiteSpace: 'pre-wrap' }}>
+                        {feedback.detailedExplanation[lang === 'ko' ? 'ko' : 'en']}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* 학습 영상 링크 */}
+                  {feedback.videoUrl && (
+                    <div style={{ marginTop: 12, padding: '12px', background: '#fff3cd', borderRadius: '6px', border: '1px solid #ffc107' }}>
+                      <strong style={{ fontSize: '13px', color: '#856404', display: 'flex', alignItems: 'center' }}>
+                        📺 {lang === 'ko' ? '학습 영상' : 'Learn More'}
+                      </strong>
+                      <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: '#666' }}>
+                        {feedback.videoTitle}
+                      </p>
+                      <a 
+                        href={feedback.videoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ 
+                          display: 'inline-block',
+                          marginTop: '8px',
+                          padding: '6px 12px',
+                          background: '#ffc107',
+                          color: '#333',
+                          textDecoration: 'none',
+                          borderRadius: '4px',
+                          fontSize: '12px',
+                          fontWeight: 'bold',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = '#ffb300'}
+                        onMouseLeave={(e) => e.target.style.background = '#ffc107'}
+                      >
+                        {lang === 'ko' ? '영상 보기' : 'Watch Video'} →
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999', fontSize: '16px' }}>
+              {t('loading')}
+            </div>
+          )}
+
+          {/* 진행도 (하단) */}
+          <div style={{ background: 'white', padding: '16px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)', border: '1px solid #e0e0e0' }}>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <div style={{ flex: 1 }}>
+                <p style={{ margin: 0, fontSize: '12px', color: '#999', marginBottom: '4px' }}>{t('progress')}</p>
+                <h3 style={{ margin: 0, fontSize: '24px', color: '#4a90e2', fontWeight: 'bold' }}>{progress}%</h3>
+                <div style={{ marginTop: '8px', background: '#e0e0e0', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
+                  <div style={{ background: 'linear-gradient(90deg, #667eea, #764ba2)', height: '100%', width: `${progress}%`, transition: 'width 0.3s' }} />
+                </div>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ margin: 0, fontSize: '12px', color: '#999', marginBottom: '4px' }}>{t('sat_score')}</p>
+                <h3 style={{ margin: 0, fontSize: '24px', color: '#e74c3c', fontWeight: 'bold' }}>{satScore}</h3>
+                <p style={{ margin: '4px 0 0 0', fontSize: '11px', color: '#999' }}>/ 800</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

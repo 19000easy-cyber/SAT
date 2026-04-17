@@ -9,6 +9,8 @@
           "id": "l1",
           "title": "Reading: Passage 1 (Practice)",
           "videoId": "u9Dg-g7t2l4",
+          "videoUrl": "https://www.khanacademy.org/humanities/literacy/grammar-and-mechanics",
+          "videoTitle": "Khan Academy - Reading Comprehension",
           "passages": {
             "en": "Climate change represents one of the most pressing challenges facing humanity today. Scientists around the world have documented rising temperatures, melting ice caps, and increasingly severe weather patterns. The burning of fossil fuels releases greenhouse gases into the atmosphere, trapping heat and altering Earth's climate system. To address this crisis, nations must transition to renewable energy sources and implement sustainable practices. The time for action is now, as delay will only intensify future consequences.",
             "ko": "기후 변화는 현재 인류가 직면한 가장 시급한 문제 중 하나를 나타낸다. 전 세계의 과학자들은 기온 상승, 빙상 용해, 점점 심해지는 기후 패턴을 기록했다. 화석 연료의 연소는 온실가스를 대기에 방출하여 열을 가두고 지구의 기후 시스템을 변화시킨다. 이 위기에 대처하기 위해 국가들은 재생 에너지로 전환하고 지속 가능한 관행을 시행해야 한다. 행동할 시간은 지금이며, 지연은 미래의 결과를 악화시킬 뿐이다."
@@ -23,32 +25,40 @@
                   "ko": "이 글의 주제는 무엇인가?"
                 },
                 "options": {
-                  "en": { "a": "American history of change", "b": "Global trends", "c": "Technology only" },
-                  "ko": { "a": "변화의 미국 역사", "b": "글로벌 트렌드", "c": "기술만" }
+                  "en": { "a": "Climate change and its urgency", "b": "Global trends", "c": "Technology only" },
+                  "ko": { "a": "기후 변화의 시급성", "b": "글로벌 트렌드", "c": "기술만" }
                 },
                 "answer": "a",
                 "points": 10,
                 "explanation": {
-                  "en": "The passage is about change, innovation, and how these forces shaped the United States.",
-                  "ko": "이 글은 변화와 혁신이 미국을 어떻게 형성했는지에 대한 내용입니다."
+                  "en": "The passage focuses on climate change as a pressing global challenge.",
+                  "ko": "글은 기후 변화를 현재의 시급한 글로벌 과제로 강조하고 있습니다."
+                },
+                "detailedExplanation": {
+                  "en": "Read the first sentence: 'Climate change represents one of the most pressing challenges facing humanity today.' This directly states the main theme. While the passage mentions technology and global trends, they are only secondary points supporting the main theme of climate change.",
+                  "ko": "첫 번째 문장을 읽어보세요: '기후 변화는 현재 인류가 직면한 가장 시급한 문제 중 하나를 나타낸다.' 이것이 주제를 직접 나타냅니다. 글에서 기술과 글로벌 트렌드도 언급하지만, 이들은 기후 변화라는 주제를 뒷받침하는 부차적인 점일 뿐입니다."
                 }
               },
               {
                 "id": "l1-e2",
                 "type": "single",
                 "question": {
-                  "en": "What has not only shaped the economy but also global trends?",
-                  "ko": "경제뿐 아니라 글로벌 트렌드도 형성한 것은 무엇인가?"
+                  "en": "What has influenced global trends?",
+                  "ko": "글로벌 트렌드에 영향을 미친 것은 무엇인가?"
                 },
                 "options": {
-                  "en": { "a": "Drive for progress", "b": "Only technology", "c": "The past" },
-                  "ko": { "a": "진보에 대한 추진력", "b": "단지 기술", "c": "과거" }
+                  "en": { "a": "Climate science efforts", "b": "Renewable energy", "c": "Fossil fuels" },
+                  "ko": { "a": "기후과학 노력", "b": "재생 에너지", "c": "화석 연료" }
                 },
                 "answer": "a",
                 "points": 10,
                 "explanation": {
-                  "en": "The text says the drive for progress shaped both the economy and global trends.",
-                  "ko": "본문에서는 진보에 대한 추진력이 경제와 글로벌 트렌드를 모두 형성했다고 말합니다."
+                  "en": "Scientists worldwide have documented climate impacts, influencing global policy.",
+                  "ko": "전 세계의 과학자들이 기후 영향을 기록하여 글로벌 정책에 영향을 주었습니다."
+                },
+                "detailedExplanation": {
+                  "en": "The passage begins: 'Scientists around the world have documented rising temperatures, melting ice caps, and increasingly severe weather patterns.' This scientific documentation has influenced global trends in climate policy and renewable energy adoption.",
+                  "ko": "글은 다음과 같이 시작합니다: '전 세계의 과학자들은 기온 상승, 빙상 용해, 점점 심해지는 기후 패턴을 기록했다.' 이러한 과학적 기록은 기후 정책과 재생 에너지 채택의 글로벌 트렌드에 영향을 미쳤습니다."
                 }
               }
             ],
@@ -152,6 +162,8 @@
           "id": "l2",
           "title": "Math: Heart of Algebra",
           "videoId": "dQw4w9WgXcQ",
+          "videoUrl": "https://www.khanacademy.org/math/algebra",
+          "videoTitle": "Khan Academy - Algebra 1",
           "passages": {
             "en": "Systems of linear equations appear frequently in real-world applications, from engineering to economics. When solving these systems, we look for values of variables that satisfy all equations simultaneously. Graphically, the solution represents the point where two or more lines intersect. Algebraically, we use methods such as substitution or elimination to find these intersection points. Understanding how to solve systems is essential for higher mathematics and practical problem-solving.",
             "ko": "선형 방정식 체계는 공학부터 경제학까지 실제 응용에서 자주 나타난다. 이 시스템을 풀 때, 우리는 모든 방정식을 동시에 만족하는 변수 값을 찾는다. 그래픽으로, 해는 두 개 이상의 직선이 교차하는 점을 나타낸다. 대수적으로, 우리는 대입법이나 소거법과 같은 방법을 사용하여 이 교차점을 찾는다. 시스템을 풀 수 있는 방법을 이해하는 것은 고등 수학과 실제 문제 해결에 필수적이다."
@@ -174,6 +186,10 @@
                 "explanation": {
                   "en": "Subtract 3 from both sides and divide by 2 to get x = 2.",
                   "ko": "양쪽에서 3을 빼고 2로 나누면 x = 2가 됩니다."
+                },
+                "detailedExplanation": {
+                  "en": "Step-by-step: 1) Start with 2x + 3 = 7. 2) Subtract 3 from both sides: 2x = 7 - 3 = 4. 3) Divide both sides by 2: x = 4 ÷ 2 = 2. To verify: 2(2) + 3 = 4 + 3 = 7 ✓",
+                  "ko": "단계별 풀이: 1) 2x + 3 = 7로 시작. 2) 양쪽에서 3을 빼기: 2x = 7 - 3 = 4. 3) 양쪽을 2로 나누기: x = 4 ÷ 2 = 2. 검증: 2(2) + 3 = 4 + 3 = 7 ✓"
                 }
               },
               {
