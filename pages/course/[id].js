@@ -10,7 +10,8 @@ export default function CoursePage() {
   const [userId, setUserId] = useState(null)
   const [selected, setSelected] = useState(null)
   const [difficulties, setDifficulties] = useState({})
-  const [satScore, setSatScore] = useState(200)
+  const [progress, setProgress] = useState(0); // 이 줄을 추가!
+  const [satScore, setSatScore] = useState(200); // 이 줄도 추가!
 
   useEffect(() => {
     let uid = localStorage.getItem('ai-study-user')
@@ -20,7 +21,16 @@ export default function CoursePage() {
     }
     setUserId(uid)
   }, [])
-
+useEffect(() => {
+    if (id) {
+      fetch(`/api/course?id=${id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data) setCourse(data);
+        })
+        .catch(err => console.error("Course fetch error:", err));
+    }
+  }, [id]);
   useEffect(() => {
     if (!userId || !id) return
     fetch(`/api/progress?userId=${userId}&courseId=${id}`)
