@@ -27,8 +27,9 @@ export default function Home() {
             </Link>
             <div style={{ color: '#555' }}>{c.description}</div>
           </li>
-        ))}
-      </ul>
-    </div>
-  )
+     )
+      )}
+    </ul>
+  </div>
+);
 }
