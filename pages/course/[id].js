@@ -68,12 +68,12 @@ export default function CoursePage() {
 
  const { t } = useI18n();
 
-  // 1. Hook에서 사용할 변수들을 먼저 정의합니다.
-  const lesson = course?.lessons[lessonIdx];
-  const curDiff = difficulties[lesson?.id] || 'medium';
-  const questions = (lesson?.quizzes && lesson?.quizzes[curDiff]) || [];
+ // 1. 데이터 정의 (딱 한 번만 선언!)
+  const lesson = course?.lessons?.[lessonIdx];
+  const curDiff = difficulties?.[lesson?.id] || 'medium';
+  const questions = lesson?.quizzes?.[curDiff] || lesson?.quizzes || [];
 
-  // 2. 그 다음 모든 Hook(useEffect, useMemo 등)을 배치합니다.
+  // 2. 퀴즈 상태 업데이트 Hook
   useEffect(() => {
     if (!questions || questions.length === 0) {
       setQuestionOrder([]);
@@ -86,16 +86,13 @@ export default function CoursePage() {
     setCurrentQuestionIdx(0);
     setSelected(null);
     setFeedback(null);
-  }, [lessonIdx, curDiff, course?.id]); // 의존성 배열 유지
+  }, [lessonIdx, curDiff, course?.id]);
 
-  // 3. 마지막으로 데이터 로딩 중일 때의 return 처리를 합니다.
-  if (!course) return <div>{t('loading')}</div>;
-
-  // 1. 변수 선언을 useMemo 위로 올립니다.
+  // 3. 현재 문제 정보 정의
   const currentQuestionIdxInOrder = questionOrder[currentQuestionIdx];
   const currentQuestion = questions[currentQuestionIdxInOrder];
 
-  // 2. useMemo는 딱 한 번만 정의합니다.
+ // 4. 보기 셔플 및 옵션 정의 (중복 없이 한 번만!)
   const currentOptions = useMemo(() => {
     if (!currentQuestion) return [];
     
@@ -107,12 +104,18 @@ export default function CoursePage() {
       en: enOptions[key],
       ko: koOptions[key] || enOptions[key],
     })));
-  }, [currentQuestion?.id]); // 의존성 배열 확인
+  }, [currentQuestion?.id]);
+
+  // 5. 데이터가 없을 때의 처리는 Hook들 '아래'에서 합니다. (중복 제거)
+  if (!course) return <div>{t('loading')}</div>;
+
   const submitQuiz = async (q) => {
-    if (!course) return
+    if (!course) return;
     if (!selected) {
-      alert(t('select_answer'))
-      return
+      alert(t('select_answer'));
+      return;
+    }
+    // ... 기존의 나머지 제출 로직이 이어집니다.
     }
 
     const lessonId = lesson.id
