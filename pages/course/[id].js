@@ -188,8 +188,8 @@ export default function CoursePage() {
 
       {lesson.passages && (
         <div style={{ marginBottom: 20 }}>
-          <h3>{t('reading_passage')}</h3>
-          <div style={{ background: '#fafafa', padding: 16, border: '1px solid #ddd', fontSize: 16, lineHeight: 1.6 }}>
+          <h3>{t ? t('reading_passage') : 'Passage'}</h3>
+          <div style={{ background: '#fafafa', padding: 16, border: '1px solid #ddd', borderRadius: 6, lineHeight: '1.6' }}>
             {lesson.passages['en']}
           </div>
         </div>
