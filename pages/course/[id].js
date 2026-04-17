@@ -129,8 +129,8 @@ export default function CoursePage() {
       <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${curDiff}`)})</h2>
       {questions.map(q => (
         <div key={q.id} style={{ marginBottom: 12 }}>
-          <p>{typeof q.question === 'object' ? q.question[lang] || q.question['en'] : q.question}</p>
-          {Object.entries(typeof q.options === 'object' && q.options[lang] ? q.options[lang] : q.options).map(([k, v]) => (
+          <p>{typeof q.question === 'object' ? q.question['en'] || q.question['en'] : q.question}</p>
+          {Object.entries(typeof q.options === 'object' && q.options['en'] ? q.options['en'] : q.options).map(([k, v]) => (
             <label key={k} style={{ display: 'block' }}>
               <input type="radio" name={q.id} value={k} onChange={e => setSelected(e.target.value)} /> {k}) {v}
             </label>
