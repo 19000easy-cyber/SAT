@@ -17,5 +17,14 @@
         "l1": "easy"
       }
     }
+  },
+  "u_5k0xrry": {
+    "sat-1": {
+      "progress": 50,
+      "difficulties": {
+        "l1": "easy"
+      },
+      "satScore": 200
+    }
   }
 }
