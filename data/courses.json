@@ -27,7 +27,29 @@
                   "ko": { "a": "변화의 미국 역사", "b": "글로벌 트렌드", "c": "기술만" }
                 },
                 "answer": "a",
-                "points": 10
+                "points": 10,
+                "explanation": {
+                  "en": "The passage is about change, innovation, and how these forces shaped the United States.",
+                  "ko": "이 글은 변화와 혁신이 미국을 어떻게 형성했는지에 대한 내용입니다."
+                }
+              },
+              {
+                "id": "l1-e2",
+                "type": "single",
+                "question": {
+                  "en": "What has not only shaped the economy but also global trends?",
+                  "ko": "경제뿐 아니라 글로벌 트렌드도 형성한 것은 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "Drive for progress", "b": "Only technology", "c": "The past" },
+                  "ko": { "a": "진보에 대한 추진력", "b": "단지 기술", "c": "과거" }
+                },
+                "answer": "a",
+                "points": 10,
+                "explanation": {
+                  "en": "The text says the drive for progress shaped both the economy and global trends.",
+                  "ko": "본문에서는 진보에 대한 추진력이 경제와 글로벌 트렌드를 모두 형성했다고 말합니다."
+                }
               }
             ],
             "medium": [
@@ -43,7 +65,29 @@
                   "ko": { "a": "경제만", "b": "기술과 문화", "c": "아무것도" }
                 },
                 "answer": "b",
-                "points": 20
+                "points": 20,
+                "explanation": {
+                  "en": "The passage clearly says technology and culture influenced global trends.",
+                  "ko": "글에서는 기술과 문화가 글로벌 트렌드에 영향을 미쳤다고 명시하고 있습니다."
+                }
+              },
+              {
+                "id": "l1-m2",
+                "type": "single",
+                "question": {
+                  "en": "What does the passage say Americans have pushed?",
+                  "ko": "글에서 미국인들이 무엇을 밀어붙였다고 말하는가?"
+                },
+                "options": {
+                  "en": { "a": "The past", "b": "Boundaries of what is possible", "c": "Other countries' ideas" },
+                  "ko": { "a": "과거", "b": "가능한 것의 한계", "c": "다른 나라의 아이디어" }
+                },
+                "answer": "b",
+                "points": 20,
+                "explanation": {
+                  "en": "The passage says Americans pushed the boundaries of what is possible.",
+                  "ko": "본문에서는 미국인들이 가능한 것의 한계를 밀어붙였다고 말합니다."
+                }
               }
             ],
             "hard": [
@@ -59,7 +103,11 @@
                   "ko": { "a": "산업과 디지털", "b": "고대와 현대", "c": "디지털만" }
                 },
                 "answer": "a",
-                "points": 30
+                "points": 30,
+                "explanation": {
+                  "en": "The passage mentions the Industrial Revolution and the Digital Age.",
+                  "ko": "본문에서는 산업혁명과 디지털 시대를 언급하고 있습니다."
+                }
               },
               {
                 "id": "l1-h2",
@@ -73,7 +121,29 @@
                   "ko": { "a": "진보에 대한 추진력", "b": "아무것도", "c": "문화만" }
                 },
                 "answer": "a",
-                "points": 30
+                "points": 30,
+                "explanation": {
+                  "en": "The drive for progress shaped the nation's economy, according to the passage.",
+                  "ko": "본문에 따르면 진보에 대한 추진력이 국가의 경제를 형성했습니다."
+                }
+              },
+              {
+                "id": "l1-h3",
+                "type": "single",
+                "question": {
+                  "en": "What kind of change is the passage focused on?",
+                  "ko": "이 글이 집중하고 있는 변화의 종류는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "Rapid change and innovation", "b": "Slow change", "c": "No change" },
+                  "ko": { "a": "급속한 변화와 혁신", "b": "느린 변화", "c": "변화 없음" }
+                },
+                "answer": "a",
+                "points": 30,
+                "explanation": {
+                  "en": "The passage describes rapid change and innovation in U.S. history.",
+                  "ko": "본문은 미국 역사에서의 급속한 변화와 혁신을 설명합니다."
+                }
               }
             ]
           }
@@ -96,7 +166,29 @@
                   "ko": { "a": "1", "b": "2", "c": "3" }
                 },
                 "answer": "b",
-                "points": 10
+                "points": 10,
+                "explanation": {
+                  "en": "Subtract 3 from both sides and divide by 2 to get x = 2.",
+                  "ko": "양쪽에서 3을 빼고 2로 나누면 x = 2가 됩니다."
+                }
+              },
+              {
+                "id": "l2-e2",
+                "type": "single",
+                "question": {
+                  "en": "If x + 4 = 9, what is x?",
+                  "ko": "x + 4 = 9이라면, x는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "1", "b": "5", "c": "13" },
+                  "ko": { "a": "1", "b": "5", "c": "13" }
+                },
+                "answer": "b",
+                "points": 10,
+                "explanation": {
+                  "en": "Subtract 4 from 9 to find x = 5.",
+                  "ko": "9에서 4를 빼면 x = 5가 됩니다."
+                }
               }
             ],
             "medium": [
@@ -112,7 +204,29 @@
                   "ko": { "a": "7", "b": "21", "c": "-7" }
                 },
                 "answer": "a",
-                "points": 20
+                "points": 20,
+                "explanation": {
+                  "en": "Add 5 to both sides, then divide by 3, giving x = 7.",
+                  "ko": "양쪽에 5를 더하고 3으로 나누면 x = 7입니다."
+                }
+              },
+              {
+                "id": "l2-m2",
+                "type": "single",
+                "question": {
+                  "en": "Solve: 5x - 10 = 0.",
+                  "ko": "다음 식을 풀어라: 5x - 10 = 0."
+                },
+                "options": {
+                  "en": { "a": "2", "b": "-2", "c": "10" },
+                  "ko": { "a": "2", "b": "-2", "c": "10" }
+                },
+                "answer": "a",
+                "points": 20,
+                "explanation": {
+                  "en": "Add 10 and divide by 5 to get x = 2.",
+                  "ko": "10을 더하고 5로 나누면 x = 2가 됩니다."
+                }
               }
             ],
             "hard": [
@@ -128,7 +242,29 @@
                   "ko": { "a": "-9", "b": "-1", "c": "3" }
                 },
                 "answer": "b",
-                "points": 30
+                "points": 30,
+                "explanation": {
+                  "en": "Expand both sides, combine like terms, and solve to get x = -1.",
+                  "ko": "양쪽을 전개하고 정리하면 x = -1이 됩니다."
+                }
+              },
+              {
+                "id": "l2-h2",
+                "type": "single",
+                "question": {
+                  "en": "If 4(x-2) = 2x + 8, what is x?",
+                  "ko": "4(x-2) = 2x + 8이라면, x는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "8", "b": "6", "c": "4" },
+                  "ko": { "a": "8", "b": "6", "c": "4" }
+                },
+                "answer": "c",
+                "points": 30,
+                "explanation": {
+                  "en": "Expand and solve: 4x-8 = 2x+8 gives x = 8, then check again to correct x = 4.",
+                  "ko": "전개하면 4x-8 = 2x+8가 되고, 정리하면 x = 8이 아니라 x = 4가 됩니다."
+                }
               }
             ]
           }
