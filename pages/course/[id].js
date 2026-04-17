@@ -90,17 +90,24 @@ export default function CoursePage() {
 
   // 3. 마지막으로 데이터 로딩 중일 때의 return 처리를 합니다.
   if (!course) return <div>{t('loading')}</div>;
+
+  // 1. 변수 선언을 useMemo 위로 올립니다.
+  const currentQuestionIdxInOrder = questionOrder[currentQuestionIdx];
+  const currentQuestion = questions[currentQuestionIdxInOrder];
+
+  // 2. useMemo는 딱 한 번만 정의합니다.
   const currentOptions = useMemo(() => {
-    if (!currentQuestion) return []
-    const enOptions = currentQuestion.options?.en || currentQuestion.options || {}
-    const koOptions = currentQuestion.options?.ko || currentQuestion.options || {}
+    if (!currentQuestion) return [];
+    
+    const enOptions = currentQuestion.options?.en || currentQuestion.options || {};
+    const koOptions = currentQuestion.options?.ko || currentQuestion.options || {};
+    
     return shuffleArray(Object.keys(enOptions).map(key => ({
       key,
       en: enOptions[key],
       ko: koOptions[key] || enOptions[key],
-    })))
-  }, [currentQuestion?.id])
-
+    })));
+  }, [currentQuestion?.id]); // 의존성 배열 확인
   const submitQuiz = async (q) => {
     if (!course) return
     if (!selected) {
