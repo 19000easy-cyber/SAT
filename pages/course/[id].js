@@ -10,9 +10,7 @@ export default function CoursePage() {
   const [userId, setUserId] = useState(null)
   const [selected, setSelected] = useState(null)
   const [difficulties, setDifficulties] = useState({})
-  const [progress, setProgress] = useState(0)
-  const [currentQuestion, setCurrentQuestion] = useState(null)
-  const [questionIndex, setQuestionIndex] = useState(0)
+  const [satScore, setSatScore] = useState(200)
 
   useEffect(() => {
     let uid = localStorage.getItem('ai-study-user')
@@ -37,24 +35,9 @@ export default function CoursePage() {
       .then(d => {
         if (typeof d.progress === 'number') setProgress(d.progress)
         if (d.difficulties) setDifficulties(d.difficulties)
+        if (d.satScore) setSatScore(d.satScore)
       })
   }, [userId, id])
-
-  useEffect(() => {
-    if (!course) return
-    selectNextQuestion()
-  }, [course, lessonIdx, difficulties])
-
-  const selectNextQuestion = () => {
-    const lesson = course.lessons[lessonIdx]
-    const curDiff = difficulties[lesson.id] || 'medium'
-    const questions = (lesson.quizzes && lesson.quizzes[curDiff]) || []
-    if (questions.length === 0) return
-    // For infinite questions, cycle through or random
-    const idx = questionIndex % questions.length
-    setCurrentQuestion(questions[idx])
-    setQuestionIndex(questionIndex + 1)
-  }
 
   const saveProgress = async (p) => {
     setProgress(p)
@@ -65,13 +48,17 @@ export default function CoursePage() {
     })
   }
 
-  const submitQuiz = async () => {
-    if (!course || !currentQuestion) return
+  const submitQuiz = async (q) => {
+    if (!course) return
     const lesson = course.lessons[lessonIdx]
     const lessonId = lesson.id
     const curDiff = difficulties[lessonId] || 'medium'
-    const correct = currentQuestion.answer
+    // find the question in the current difficulty set
+    const setForDiff = (lesson.quizzes && lesson.quizzes[curDiff]) || []
+    const question = setForDiff.find(x => x.id === q.id) || q
+    const correct = question.answer
     const correctAnswer = selected === correct
+    const points = question.points || 10
 
     // adjust difficulty
     const order = ['easy', 'medium', 'hard']
@@ -82,18 +69,21 @@ export default function CoursePage() {
     const newDifficulties = { ...difficulties, [lessonId]: newDiff }
     setDifficulties(newDifficulties)
 
-    // save progress value (example: increment correct count)
-    const got = correctAnswer ? (progress + 10) : progress
+    // calculate SAT score
+    const scoreChange = correctAnswer ? points : -Math.floor(points / 2)
+    const newSatScore = Math.max(200, Math.min(800, satScore + scoreChange))
+    setSatScore(newSatScore)
+
+    // save progress value (example: 100 correct, 50 incorrect)
+    const got = correctAnswer ? 100 : 50
     setProgress(got)
     await fetch('/api/progress', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, courseId: id, progress: got, difficulties: newDifficulties }),
+      body: JSON.stringify({ userId, courseId: id, progress: got, difficulties: newDifficulties, satScore: newSatScore }),
     })
 
     alert(correctAnswer ? t('correct_msg') : t('incorrect_msg'))
-    setSelected(null)
-    selectNextQuestion()
   }
 
   const { t } = useI18n()
@@ -102,6 +92,8 @@ export default function CoursePage() {
 
   const lesson = course.lessons[lessonIdx]
   const curDiff = difficulties[lesson.id] || 'medium'
+  // select questions for this lesson/difficulty (fallbacks)
+  const questions = ((lesson.quizzes && lesson.quizzes[curDiff]) || lesson.quizzes?.medium || lesson.quizzes?.easy || [])
 
   return (
     <div style={{ maxWidth: 900, margin: '40px auto', fontFamily: 'Arial, sans-serif' }}>
@@ -113,7 +105,7 @@ export default function CoursePage() {
         <ul>
           {course.lessons.map((l, i) => (
             <li key={l.id} style={{ margin: '6px 0' }}>
-              <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null); setQuestionIndex(0); selectNextQuestion() }}>{i+1}. {l.title}</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setLessonIdx(i); setSelected(null) }}>{i+1}. {l.title}</a>
             </li>
           ))}
         </ul>
@@ -125,20 +117,30 @@ export default function CoursePage() {
         </div>
       </div>
 
-      <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${curDiff}`)})</h2>
-      {currentQuestion && (
-        <div style={{ marginBottom: 12 }}>
-          <p>{currentQuestion.question}</p>
-          {Object.entries(currentQuestion.options).map(([k, v]) => (
-            <label key={k} style={{ display: 'block' }}>
-              <input type="radio" name={currentQuestion.id} value={k} onChange={e => setSelected(e.target.value)} /> {k}) {v}
-            </label>
-          ))}
-          <button onClick={submitQuiz} style={{ marginTop: 8 }}>{t('submit')}</button>
+      {lesson.passages && (
+        <div style={{ marginBottom: 20 }}>
+          <h3>{t('reading_passage')}</h3>
+          <div style={{ background: '#fafafa', padding: 16, border: '1px solid #ddd', fontSize: 16, lineHeight: 1.6 }}>
+            {lesson.passages['en'] || lesson.passages['en']}
+          </div>
         </div>
       )}
 
-      <h3 style={{ marginTop: 24 }}>{t('progress')}: {progress}</h3>
+      <h2>{t('quizPrefix')} {lesson.title} ({t(`difficulty_${curDiff}`)})</h2>
+      {questions.map(q => (
+        <div key={q.id} style={{ marginBottom: 12 }}>
+          <p>{typeof q.question === 'object' ? q.question[lang] || q.question['en'] : q.question}</p>
+          {Object.entries(typeof q.options === 'object' && q.options[lang] ? q.options[lang] : q.options).map(([k, v]) => (
+            <label key={k} style={{ display: 'block' }}>
+              <input type="radio" name={q.id} value={k} onChange={e => setSelected(e.target.value)} /> {k}) {v}
+            </label>
+          ))}
+          <button onClick={() => submitQuiz(q)} style={{ marginTop: 8 }}>{t('submit')}</button>
+        </div>
+      ))}
+
+      <h3 style={{ marginTop: 24 }}>{t('progress')}: {progress}%</h3>
+      <h3 style={{ marginTop: 12 }}>{t('sat_score')}: {satScore}</h3>
     </div>
   )
 }

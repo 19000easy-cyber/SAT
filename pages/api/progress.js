@@ -29,23 +29,26 @@ export default function handler(req, res) {
     const entry = user[courseId]
     // support legacy numeric progress value
     if (typeof entry === 'number' || !entry) {
-      return res.status(200).json({ progress: entry || 0, difficulties: {} })
+      const satScore = entry === 100 ? 400 : 200 // simple mapping for legacy
+      return res.status(200).json({ progress: entry || 0, difficulties: {}, satScore })
     }
-    return res.status(200).json({ progress: entry.progress || 0, difficulties: entry.difficulties || {} })
+    const satScore = entry.satScore || 200
+    return res.status(200).json({ progress: entry.progress || 0, difficulties: entry.difficulties || {}, satScore })
   }
 
   if (req.method === 'POST') {
-    const { userId, courseId, progress, difficulties } = req.body
+    const { userId, courseId, progress, difficulties, satScore } = req.body
     if (!userId || !courseId) return res.status(400).json({ error: 'missing' })
     const data = readData()
     if (!data[userId]) data[userId] = {}
     const prev = data[userId][courseId]
     if (typeof prev === 'number' || !prev) {
-      data[userId][courseId] = { progress: progress || (prev || 0), difficulties: difficulties || {} }
+      data[userId][courseId] = { progress: progress || (prev || 0), difficulties: difficulties || {}, satScore: satScore || 200 }
     } else {
       data[userId][courseId] = {
         progress: typeof progress === 'number' ? progress : (prev.progress || 0),
-        difficulties: { ...(prev.difficulties || {}), ...(difficulties || {}) }
+        difficulties: { ...(prev.difficulties || {}), ...(difficulties || {}) },
+        satScore: typeof satScore === 'number' ? satScore : (prev.satScore || 200)
       }
     }
     writeData(data)

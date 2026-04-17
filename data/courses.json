@@ -9,102 +9,71 @@
           "id": "l1",
           "title": "Reading: Passage 1 (Practice)",
           "videoId": "u9Dg-g7t2l4",
+          "passages": {
+            "en": "The history of the United States is marked by periods of rapid change and innovation. From the Industrial Revolution to the Digital Age, Americans have consistently pushed the boundaries of what is possible. This drive for progress has not only shaped the nation's economy but also influenced global trends in technology and culture.",
+            "ko": "미국의 역사는 급속한 변화와 혁신의 시기로 특징지어진다. 산업혁명부터 디지털 시대까지, 미국인들은 가능한 것의 한계를 지속적으로 밀어붙였다. 이 진보에 대한 추진력은 국가의 경제를 형성할 뿐만 아니라 기술과 문화의 글로벌 트렌드에도 영향을 미쳤다."
+          },
           "quizzes": {
             "easy": [
               {
                 "id": "l1-e1",
                 "type": "single",
-                "question": "이 글의 주제는 무엇인가?",
-                "options": { "a": "선택지 A", "b": "선택지 B", "c": "선택지 C" },
-                "answer": "b"
-              },
-              {
-                "id": "l1-e2",
-                "type": "single",
-                "question": "다음 단어의 의미는 무엇인가? 'Benevolent'",
-                "options": { "a": "악의 있는", "b": "친절한", "c": "무관심한" },
-                "answer": "b"
-              },
-              {
-                "id": "l1-e3",
-                "type": "single",
-                "question": "이 문장에서 'however'는 어떤 역할을 하는가?",
-                "options": { "a": "강조", "b": "대조", "c": "원인" },
-                "answer": "b"
-              },
-              {
-                "id": "l1-e4",
-                "type": "single",
-                "question": "다음 문장의 주어는 무엇인가?",
-                "options": { "a": "명사", "b": "동사", "c": "형용사" },
-                "answer": "a"
-              },
-              {
-                "id": "l1-e5",
-                "type": "single",
-                "question": "'The cat sat on the mat.' 이 문장은 어떤 시제인가?",
-                "options": { "a": "과거", "b": "현재", "c": "미래" },
-                "answer": "b"
+                "question": {
+                  "en": "What is the main theme of this passage?",
+                  "ko": "이 글의 주제는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "American history of change", "b": "Global trends", "c": "Technology only" },
+                  "ko": { "a": "변화의 미국 역사", "b": "글로벌 트렌드", "c": "기술만" }
+                },
+                "answer": "a",
+                "points": 10
               }
             ],
             "medium": [
               {
                 "id": "l1-m1",
                 "type": "single",
-                "question": "이 글에서 저자가 주장하는 핵심 요지는 무엇인가?",
-                "options": { "a": "옵션 A", "b": "옵션 B", "c": "옵션 C" },
-                "answer": "a"
-              },
-              {
-                "id": "l1-m2",
-                "type": "single",
-                "question": "다음 문단의 주장을 뒷받침하는 증거는 무엇인가?",
-                "options": { "a": "예시 1", "b": "예시 2", "c": "예시 3" },
-                "answer": "a"
-              },
-              {
-                "id": "l1-m3",
-                "type": "single",
-                "question": "저자의 어조는 어떠한가?",
-                "options": { "a": "비판적", "b": "중립적", "c": "지지적" },
-                "answer": "b"
-              },
-              {
-                "id": "l1-m4",
-                "type": "single",
-                "question": "이 글의 구조는 어떻게 되어 있는가?",
-                "options": { "a": "서론-본론-결론", "b": "비교", "c": "기술" },
-                "answer": "a"
-              },
-              {
-                "id": "l1-m5",
-                "type": "single",
-                "question": "다음 단어의 유의어는 무엇인가? 'Eloquent'",
-                "options": { "a": "말 없는", "b": "유창한", "c": "조용한" },
-                "answer": "b"
+                "question": {
+                  "en": "According to the passage, what has influenced global trends?",
+                  "ko": "글에 따르면, 글로벌 트렌드에 영향을 미친 것은 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "Only economy", "b": "Technology and culture", "c": "Nothing" },
+                  "ko": { "a": "경제만", "b": "기술과 문화", "c": "아무것도" }
+                },
+                "answer": "b",
+                "points": 20
               }
             ],
             "hard": [
               {
                 "id": "l1-h1",
                 "type": "single",
-                "question": "다음 문단의 암시적 의미를 분석한 것으로 옳은 것은?",
-                "options": { "a": "보기 1", "b": "보기 2", "c": "보기 3" },
-                "answer": "c"
+                "question": {
+                  "en": "What specific periods are mentioned in the passage?",
+                  "ko": "글에서 언급된 특정 시기는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "Industrial and Digital", "b": "Ancient and Modern", "c": "Only Digital" },
+                  "ko": { "a": "산업과 디지털", "b": "고대와 현대", "c": "디지털만" }
+                },
+                "answer": "a",
+                "points": 30
               },
               {
                 "id": "l1-h2",
                 "type": "single",
-                "question": "이 글의 구조를 가장 잘 설명하는 것은?",
-                "options": { "a": "문제-해결", "b": "원인-결과", "c": "비교-대조" },
-                "answer": "a"
-              },
-              {
-                "id": "l1-h3",
-                "type": "single",
-                "question": "저자의 의도는 무엇인가?",
-                "options": { "a": "설득", "b": "정보 제공", "c": "오락" },
-                "answer": "a"
+                "question": {
+                  "en": "What has shaped the nation's economy according to the passage?",
+                  "ko": "글에 따르면, 국가의 경제를 형성한 것은 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "Drive for progress", "b": "Nothing", "c": "Only culture" },
+                  "ko": { "a": "진보에 대한 추진력", "b": "아무것도", "c": "문화만" }
+                },
+                "answer": "a",
+                "points": 30
               }
             ]
           }
@@ -118,69 +87,48 @@
               {
                 "id": "l2-e1",
                 "type": "single",
-                "question": "If 2x + 3 = 7, what is x?",
-                "options": { "a": "1", "b": "2", "c": "3" },
-                "answer": "b"
-              },
-              {
-                "id": "l2-e2",
-                "type": "single",
-                "question": "Solve: 5y = 20. y = ?",
-                "options": { "a": "4", "b": "5", "c": "15" },
-                "answer": "a"
-              },
-              {
-                "id": "l2-e3",
-                "type": "single",
-                "question": "What is 3 + 4?",
-                "options": { "a": "5", "b": "7", "c": "8" },
-                "answer": "b"
+                "question": {
+                  "en": "If 2x + 3 = 7, what is x?",
+                  "ko": "2x + 3 = 7이라면, x는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "1", "b": "2", "c": "3" },
+                  "ko": { "a": "1", "b": "2", "c": "3" }
+                },
+                "answer": "b",
+                "points": 10
               }
             ],
             "medium": [
               {
                 "id": "l2-m1",
                 "type": "single",
-                "question": "Solve for x: 3x - 5 = 16.",
-                "options": { "a": "7", "b": "21", "c": "-7" },
-                "answer": "a"
-              },
-              {
-                "id": "l2-m2",
-                "type": "single",
-                "question": "If 4z + 2 = 18, z = ?",
-                "options": { "a": "3", "b": "4", "c": "5" },
-                "answer": "b"
-              },
-              {
-                "id": "l2-m3",
-                "type": "single",
-                "question": "Solve: 2(x + 1) = 10. x = ?",
-                "options": { "a": "3", "b": "4", "c": "5" },
-                "answer": "b"
+                "question": {
+                  "en": "Solve for x: 3x - 5 = 16.",
+                  "ko": "x를 구하시오: 3x - 5 = 16."
+                },
+                "options": {
+                  "en": { "a": "7", "b": "21", "c": "-7" },
+                  "ko": { "a": "7", "b": "21", "c": "-7" }
+                },
+                "answer": "a",
+                "points": 20
               }
             ],
             "hard": [
               {
                 "id": "l2-h1",
                 "type": "single",
-                "question": "If 2(x+3) = 3(x-1), what is x?",
-                "options": { "a": "-9", "b": "-1", "c": "3" },
-                "answer": "b"
-              },
-              {
-                "id": "l2-h2",
-                "type": "single",
-                "question": "Solve: 5(x - 2) = 3(x + 4). x = ?",
-                "options": { "a": "13", "b": "7", "c": "-7" },
-                "answer": "a"
-              },
-              {
-                "id": "l2-h3",
-                "type": "single",
-                "question": "If ax + b = c, and a=2, b=3, c=7, x = ?",
-                "options": { "a": "1", "b": "2", "c": "3" },
-                "answer": "b"
+                "question": {
+                  "en": "If 2(x+3) = 3(x-1), what is x?",
+                  "ko": "2(x+3) = 3(x-1)이라면, x는 무엇인가?"
+                },
+                "options": {
+                  "en": { "a": "-9", "b": "-1", "c": "3" },
+                  "ko": { "a": "-9", "b": "-1", "c": "3" }
+                },
+                "answer": "b",
+                "points": 30
               }
             ]
           }
