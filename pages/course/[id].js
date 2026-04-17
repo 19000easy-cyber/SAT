@@ -22,22 +22,23 @@ export default function CoursePage() {
   }, [])
 
   useEffect(() => {
-    if (!id) return
-    fetch(`/api/course?id=${id}`)
-      .then(r => r.json())
-      .then(d => setCourse(d))
-  }, [id])
-
-  useEffect(() => {
     if (!userId || !id) return
     fetch(`/api/progress?userId=${userId}&courseId=${id}`)
       .then(r => r.json())
       .then(d => {
-        if (typeof d.progress === 'number') setProgress(d.progress)
-        if (d.difficulties) setDifficulties(d.difficulties)
-        if (d.satScore) setSatScore(d.satScore)
+        // 함수가 존재하는지 확인한 후에만 실행하도록 안전하게 변경합니다.
+        if (typeof d.progress === 'number' && typeof setProgress === 'function') {
+          setProgress(d.progress);
+        }
+        if (d.difficulties && typeof setDifficulties === 'function') {
+          setDifficulties(d.difficulties);
+        }
+        if (d.satScore && typeof setSatScore === 'function') {
+          setSatScore(d.satScore);
+        }
       })
-  }, [userId, id])
+      .catch(err => console.error("Progress fetch error:", err));
+  }, [userId, id]);
 
   const saveProgress = async (p) => {
     setProgress(p)
